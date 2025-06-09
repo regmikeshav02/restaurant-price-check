@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PriceBite - Compare Restaurant Prices</title>
+    <title>PriceBite - Find & Compare Local Food Prices</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
         .hero-section {
-            background-image: url('https://placehold.co/1200x400/f97316/ffffff');
+            /* New, high-quality food image */
+            background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
             background-size: cover;
             background-position: center;
+        }
+        .hero-text-shadow {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
         }
         /* Simple spinner for loading states */
         .loader {
@@ -29,53 +33,58 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        /* Style for file input button */
+        .custom-file-button input[type="file"] {
+            display: none;
+        }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-100">
 
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-orange-500">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="text-3xl font-extrabold text-orange-500">
                 <i class="fas fa-utensils mr-2"></i>PriceBite
             </div>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#" class="text-gray-600 hover:text-orange-500">Home</a>
-                <a href="#search" class="text-gray-600 hover:text-orange-500">Find Deals</a>
-                <a href="#upload" class="text-gray-600 hover:text-orange-500">Add Prices</a>
-                <a href="#about" class="text-gray-600 hover:text-orange-500">About</a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-gray-600 hover:text-orange-500 transition duration-150">Home</a>
+                <a href="#search" class="text-gray-600 hover:text-orange-500 transition duration-150">Find Deals</a>
+                <a href="#upload" class="bg-orange-500 text-white font-bold py-2 px-4 rounded-full hover:bg-orange-600 transition duration-300 transform hover:scale-105">
+                    <i class="fas fa-plus-circle mr-2"></i>Add Prices
+                </a>
             </nav>
-            <button class="md:hidden">
-                <i class="fas fa-bars text-gray-600 text-2xl"></i>
+            <button class="md:hidden text-gray-600 hover:text-orange-500">
+                <i class="fas fa-bars text-2xl"></i>
             </button>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-section text-white py-20 relative">
-        <div class="absolute inset-0 bg-black opacity-50"></div>
+    <section class="hero-section text-white py-24 sm:py-32 relative">
+        <div class="absolute inset-0 bg-black opacity-60"></div>
         <div class="container mx-auto px-4 text-center relative z-10">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Find the Best Price for Your Next Meal</h1>
-            <p class="text-lg md:text-xl mb-8">Compare menu prices from local restaurants and save money.</p>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 hero-text-shadow">Find the Best Price for Your Next Meal</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto hero-text-shadow">Compare menu prices from local restaurants and save money before you even leave the house.</p>
         </div>
     </section>
 
     <!-- Search Section -->
-    <section id="search" class="py-16 bg-white">
+    <section id="search" class="py-16 sm:py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">What are you craving?</h2>
-            <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-10">What are you craving?</h2>
+            <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
                     <div>
-                        <label for="food-item" class="block text-sm font-medium text-gray-700">Food Item</label>
-                        <input type="text" id="food-item" placeholder="e.g., Burger and Fries, Pepperoni Pizza" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                        <label for="food-item" class="block text-sm font-medium text-gray-700 mb-1">Food Item</label>
+                        <input type="text" id="food-item" placeholder="e.g., Burger and Fries" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 py-3">
                     </div>
                     <div>
-                        <label for="location" class="block text-sm font-medium text-gray-700">Your Location</label>
-                        <input type="text" id="location" placeholder="City, State or ZIP Code" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                        <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Your Location</label>
+                        <input type="text" id="location" placeholder="City, State or ZIP Code" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 py-3">
                     </div>
-                    <div class="self-end">
-                        <button id="search-btn" class="w-full bg-orange-500 text-white font-bold py-3 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition duration-150 ease-in-out">
+                    <div>
+                        <button id="search-btn" class="w-full bg-orange-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition duration-300 transform hover:scale-105 shadow-md">
                             <i class="fas fa-search mr-2"></i>Find Food
                         </button>
                     </div>
@@ -85,11 +94,11 @@
     </section>
 
     <!-- Results Section -->
-    <section id="results" class="py-16">
+    <section id="results" class="py-16 sm:py-20">
         <div class="container mx-auto px-4">
-            <h3 id="results-heading" class="text-2xl font-bold text-gray-800 mb-6">Recently Added Deals</h3>
+            <h3 id="results-heading" class="text-3xl md:text-4xl font-bold text-gray-800 mb-10 text-center">Today's Top Finds</h3>
              <div id="loader" class="flex justify-center py-8"><div class="loader"></div></div>
-            <div id="results-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div id="results-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Results from Firestore will be injected here -->
             </div>
             <div id="no-results" class="text-center py-12 hidden">
@@ -100,60 +109,68 @@
     </section>
 
     <!-- Upload Section -->
-    <section id="upload" class="py-16 bg-gray-100">
+    <section id="upload" class="py-16 sm:py-20 bg-gray-200">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Help the Community Find Great Deals</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Help the Community Find Great Deals</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <!-- User Upload -->
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4"><i class="fas fa-user-edit mr-2"></i>For Foodies</h3>
+                <div class="bg-white p-8 rounded-xl shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4"><i class="fas fa-user-edit mr-2 text-orange-500"></i>For Foodies</h3>
                     <p class="text-gray-600 mb-6">Spotted a menu? Help other food lovers by adding the latest prices.</p>
                     <form id="user-upload-form">
                         <div class="space-y-4">
+                            <!-- Input fields remain the same -->
                              <div>
                                 <label for="user-name" class="block text-sm font-medium text-gray-700">Your Name (Optional)</label>
-                                <input type="text" id="user-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                                <input type="text" id="user-name" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500">
                             </div>
                             <div>
                                 <label for="user-restaurant-name" class="block text-sm font-medium text-gray-700">Restaurant Name</label>
-                                <input type="text" id="user-restaurant-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" required>
+                                <input type="text" id="user-restaurant-name" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" required>
                             </div>
                             <div>
                                 <label for="user-restaurant-location" class="block text-sm font-medium text-gray-700">Restaurant Location (City, State)</label>
-                                <input type="text" id="user-restaurant-location" placeholder="e.g., Austin, TX" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" required>
+                                <input type="text" id="user-restaurant-location" placeholder="e.g., Austin, TX" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" required>
                             </div>
                             <div>
-                                <label for="user-file-upload" class="block text-sm font-medium text-gray-700">Upload Menu (Photo, PDF, etc.)</label>
-                                <input type="file" id="user-file-upload" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100" required>
+                                <label for="user-file-upload-btn" class="w-full text-center cursor-pointer bg-orange-50 hover:bg-orange-100 text-orange-700 font-semibold py-2 px-4 rounded-lg border border-orange-200">
+                                    <i class="fas fa-upload mr-2"></i>
+                                    <span id="user-file-name">Upload Menu Photo/PDF</span>
+                                </label>
+                                <input type="file" id="user-file-upload" class="hidden" required>
                             </div>
                         </div>
-                        <button type="submit" class="mt-6 w-full bg-orange-500 text-white font-bold py-3 px-4 rounded-md hover:bg-orange-600">Submit Menu</button>
+                        <button type="submit" class="mt-6 w-full bg-orange-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-orange-600 transform hover:scale-105 transition-all shadow-md">Submit Menu</button>
                     </form>
                 </div>
                 <!-- Restaurant Owner Upload -->
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4"><i class="fas fa-store mr-2"></i>For Restaurants</h3>
+                 <div class="bg-white p-8 rounded-xl shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4"><i class="fas fa-store mr-2 text-green-500"></i>For Restaurants</h3>
                     <p class="text-gray-600 mb-6">Get more customers by sharing your official menu and prices with our community.</p>
                     <form id="restaurant-upload-form">
                          <div class="space-y-4">
+                            <!-- Input fields remain the same -->
                             <div>
                                 <label for="owner-name" class="block text-sm font-medium text-gray-700">Your Name (Owner/Manager)</label>
-                                <input type="text" id="owner-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" required>
+                                <input type="text" id="owner-name" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" required>
                             </div>
                              <div>
                                 <label for="restaurant-name" class="block text-sm font-medium text-gray-700">Restaurant Name</label>
-                                <input type="text" id="restaurant-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" required>
+                                <input type="text" id="restaurant-name" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" required>
                             </div>
                              <div>
                                 <label for="restaurant-location" class="block text-sm font-medium text-gray-700">Restaurant Location (City, State)</label>
-                                <input type="text" id="restaurant-location" placeholder="e.g., Miami, FL" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" required>
+                                <input type="text" id="restaurant-location" placeholder="e.g., Miami, FL" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" required>
                             </div>
-                            <div>
-                                <label for="restaurant-file-upload" class="block text-sm font-medium text-gray-700">Upload Official Menu (PDF, CSV)</label>
-                                <input type="file" id="restaurant-file-upload" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100" required>
+                           <div>
+                                <label for="restaurant-file-upload-btn" class="w-full text-center cursor-pointer bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-2 px-4 rounded-lg border border-green-200">
+                                    <i class="fas fa-upload mr-2"></i>
+                                    <span id="restaurant-file-name">Upload Official Menu</span>
+                                </label>
+                                <input type="file" id="restaurant-file-upload" class="hidden" required>
                             </div>
                         </div>
-                        <button type="submit" class="mt-6 w-full bg-green-600 text-white font-bold py-3 px-4 rounded-md hover:bg-green-700">Upload Official Menu</button>
+                        <button type="submit" class="mt-6 w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transform hover:scale-105 transition-all shadow-md">Upload Official Menu</button>
                     </form>
                 </div>
             </div>
@@ -161,13 +178,13 @@
     </section>
 
     <!-- How It Works Section -->
-    <section id="about" class="py-16 bg-white">
+    <section id="about" class="py-16 sm:py-20 bg-white">
         <div class="container mx-auto px-4 text-center">
             <i class="fas fa-cogs text-5xl text-orange-500 mb-4"></i>
-            <h2 class="text-3xl font-bold text-gray-800">How It Works</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800">How It Works</h2>
             <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Our platform is powered by food lovers like you. We make it easy to share and find the latest menu prices.</p>
-            <div class="mt-8 flex justify-center">
-                <div class="bg-gray-100 rounded-lg p-6 max-w-2xl text-left">
+            <div class="mt-10 flex justify-center">
+                <div class="bg-gray-50 rounded-xl p-8 max-w-2xl text-left border">
                     <h4 class="font-semibold text-lg mb-2">Our Process:</h4>
                     <ol class="list-decimal list-inside text-gray-600 space-y-2">
                         <li><strong>Menus are Uploaded:</strong> Users and restaurant owners submit menus from local spots.</li>
@@ -181,7 +198,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
+    <footer class="bg-gray-800 text-white py-10">
         <div class="container mx-auto px-4 text-center">
             <p>&copy; 2025 PriceBite. All Rights Reserved.</p>
             <p class="text-sm text-gray-400 mt-2">Disclaimer: Prices are submitted by the community and may change. Please confirm with the restaurant.</p>
@@ -189,8 +206,8 @@
     </footer>
 
     <!-- Modal for upload confirmation -->
-    <div id="upload-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
-        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+    <div id="upload-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-xl bg-white">
             <div class="mt-3 text-center">
                 <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
                     <i class="fas fa-check text-green-600 text-2xl"></i>
@@ -211,7 +228,6 @@
     <!-- Firebase SDK -->
     <script type="module">
         // IMPORTANT: Replace this with your actual Firebase config object.
-        // You can get this from your Firebase project settings.
         const firebaseConfig = {
             apiKey: "YOUR_API_KEY",
             authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
@@ -221,12 +237,9 @@
             appId: "YOUR_APP_ID"
         };
         
-        // --- Firebase Imports ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where, limit, orderBy } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
-        // --- Firebase Initialization ---
-        // We wrap this in a try-catch block to handle cases where the config is missing.
         let app, db;
         try {
             app = initializeApp(firebaseConfig);
@@ -235,9 +248,7 @@
             console.error("Firebase initialization failed. Please add your Firebase config.", e);
         }
         
-        // --- DOM Elements ---
         const searchBtn = document.getElementById('search-btn');
-        const resultsSection = document.getElementById('results');
         const resultsHeading = document.getElementById('results-heading');
         const resultsList = document.getElementById('results-list');
         const noResults = document.getElementById('no-results');
@@ -248,28 +259,25 @@
         const restaurantUploadForm = document.getElementById('restaurant-upload-form');
         const uploadModal = document.getElementById('upload-modal');
         const closeModalBtn = document.getElementById('close-modal');
-        
-        // --- Main App Logic ---
 
-        // Listen for user search actions
-        searchBtn.addEventListener('click', handleSearch);
-
-        // Listen for menu uploads
-        userUploadForm.addEventListener('submit', (e) => handleFileUpload(e, 'community'));
-        restaurantUploadForm.addEventListener('submit', (e) => handleFileUpload(e, 'official'));
-        
-        // Listen for modal close
-        closeModalBtn.addEventListener('click', () => uploadModal.classList.add('hidden'));
-
-        // Load initial data when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchAndDisplayData();
+        // Custom file input handlers
+        document.getElementById('user-file-upload-btn').addEventListener('click', () => document.getElementById('user-file-upload').click());
+        document.getElementById('user-file-upload').addEventListener('change', (e) => {
+            document.getElementById('user-file-name').textContent = e.target.files[0] ? e.target.files[0].name : 'Upload Menu Photo/PDF';
         });
 
-        /**
-         * Fetches data from Firestore and initiates the display.
-         * @param {Query} [firestoreQuery=null] - An optional Firestore query to execute. If null, fetches recent items.
-         */
+        document.getElementById('restaurant-file-upload-btn').addEventListener('click', () => document.getElementById('restaurant-file-upload').click());
+        document.getElementById('restaurant-file-upload').addEventListener('change', (e) => {
+            document.getElementById('restaurant-file-name').textContent = e.target.files[0] ? e.target.files[0].name : 'Upload Official Menu';
+        });
+
+        searchBtn.addEventListener('click', handleSearch);
+        userUploadForm.addEventListener('submit', (e) => handleFileUpload(e, 'community'));
+        restaurantUploadForm.addEventListener('submit', (e) => handleFileUpload(e, 'official'));
+        closeModalBtn.addEventListener('click', () => uploadModal.classList.add('hidden'));
+
+        document.addEventListener('DOMContentLoaded', () => fetchAndDisplayData());
+
         async function fetchAndDisplayData(firestoreQuery = null) {
             if (!db) {
                 resultsList.innerHTML = `<p class="text-red-500 text-center col-span-full">Firebase is not configured. Please add your firebaseConfig object to the script.</p>`;
@@ -286,15 +294,12 @@
                 if (firestoreQuery) {
                     querySnapshot = await getDocs(firestoreQuery);
                 } else {
-                    // Default view: fetch the 12 most recently added items that are verified.
                     const q = query(collection(db, "menuItems"), orderBy("createdAt", "desc"), limit(12));
                     querySnapshot = await getDocs(q);
                 }
                 
                 const menuItems = [];
-                querySnapshot.forEach((doc) => {
-                    menuItems.push({ id: doc.id, ...doc.data() });
-                });
+                querySnapshot.forEach((doc) => menuItems.push({ id: doc.id, ...doc.data() }));
                 
                 displayResults(menuItems);
 
@@ -306,9 +311,6 @@
             }
         }
 
-        /**
-         * Handles the search functionality by querying Firestore.
-         */
         async function handleSearch() {
             const itemQuery = foodItemInput.value.trim();
             const locationQuery = locationInput.value.trim(); 
@@ -320,29 +322,20 @@
             }
             
             resultsHeading.textContent = `Search Results for "${itemQuery}" in "${locationQuery}"`;
-
-            // REALITY CHECK: Firestore's text search is limited. A real-world app would use a dedicated
-            // search service like Algolia or Elasticsearch. For this demo, we'll perform a simple query.
-            // This query is case-sensitive and doesn't support partial matches well.
             
-            // We create a composite query. This requires creating a composite index in your Firestore console.
             const itemsRef = collection(db, "menuItems");
             let q;
             if (itemQuery && locationQuery) {
                  q = query(itemsRef, where("item_lowercase", "==", itemQuery.toLowerCase()), where("location", "==", locationQuery));
             } else if (itemQuery) {
                  q = query(itemsRef, where("item_lowercase", "==", itemQuery.toLowerCase()));
-            } else { // only locationQuery exists
+            } else {
                  q = query(itemsRef, where("location", "==", locationQuery));
             }
             
             fetchAndDisplayData(q);
         }
 
-        /**
-         * Displays an array of menu item data on the page.
-         * @param {Array} data - The array of menu items to display.
-         */
         function displayResults(data) {
             resultsList.innerHTML = '';
             
@@ -350,7 +343,7 @@
                 noResults.classList.add('hidden');
                 data.forEach(item => {
                     const resultCard = `
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300">
                             <div class="p-6">
                                 <div class="flex justify-between items-start mb-2">
                                     <h4 class="text-xl font-bold text-gray-800 pr-2">${item.restaurant || 'N/A'}</h4>
@@ -358,14 +351,13 @@
                                 </div>
                                 <p class="text-gray-600">${item.location || 'N/A'}</p>
                                 <div class="my-4">
-                                    <p class="text-3xl font-bold text-orange-500">$${(item.price || 0).toFixed(2)}</p>
-                                    <p class="text-sm text-gray-600 font-medium">${item.item || 'N/A'}</p>
+                                    <p class="text-4xl font-extrabold text-orange-500">$${(item.price || 0).toFixed(2)}</p>
+                                    <p class="text-md text-gray-700 font-medium mt-1">${item.item || 'N/A'}</p>
                                 </div>
-                                <div class="flex justify-between items-center text-sm text-gray-600">
+                                <div class="flex justify-between items-center text-sm text-gray-500 border-t pt-4 mt-4">
                                     <span><i class="fas fa-star text-yellow-400"></i> ${item.rating || 'N/A'}</span>
                                     <span><i class="fas fa-map-marker-alt text-gray-400"></i> ${item.distance || 'N/A'} miles</span>
                                 </div>
-                                <button class="mt-6 w-full bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-md hover:bg-gray-300">View Full Menu</button>
                             </div>
                         </div>
                     `;
@@ -376,10 +368,6 @@
             }
         }
         
-        /**
-         * Handles the file upload process for both users and restaurants.
-         * Saves metadata to Firestore.
-         */
         async function handleFileUpload(e, sourceType) {
             e.preventDefault();
             if (!db) {
@@ -395,13 +383,10 @@
                 return;
             }
 
-            // In a real app, you would first upload the file to Firebase Storage
-            // and get the download URL to store in Firestore. Here, we'll just store the filename.
-
             let uploadData = {
-                sourceType: sourceType, // 'community' or 'official'
+                sourceType: sourceType,
                 fileName: file.name,
-                status: 'pending_review', // All uploads start as pending
+                status: 'pending_review',
                 createdAt: new Date(),
             };
              
@@ -409,19 +394,19 @@
                 uploadData.uploaderName = form.querySelector('#user-name').value || 'Anonymous';
                 uploadData.restaurantName = form.querySelector('#user-restaurant-name').value;
                 uploadData.restaurantLocation = form.querySelector('#user-restaurant-location').value;
-            } else { // 'official'
+            } else {
                 uploadData.uploaderName = form.querySelector('#owner-name').value;
                 uploadData.restaurantName = form.querySelector('#restaurant-name').value;
                 uploadData.restaurantLocation = form.querySelector('#restaurant-location').value;
             }
 
             try {
-                // Add a new document with a generated ID to the 'uploads' collection.
                 const docRef = await addDoc(collection(db, "uploads"), uploadData);
                 console.log("Upload metadata saved with ID: ", docRef.id);
-
                 showUploadConfirmation();
                 form.reset();
+                document.getElementById('user-file-name').textContent = 'Upload Menu Photo/PDF';
+                document.getElementById('restaurant-file-name').textContent = 'Upload Official Menu';
             } catch (error) {
                 console.error("Error adding document: ", error);
                 alert("There was an error submitting your menu. Please check your Firestore rules and ensure the 'uploads' collection exists.");
